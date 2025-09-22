@@ -1,6 +1,132 @@
 import streamlit as st
 from datetime import date
-from diseases import disease_dict
+
+disease_dict = {
+   "flu": {
+       "symptoms": ["fever", "cough", "sore throat", "fatigue"],
+       "prevention": ["Get vaccinated yearly", "Wash hands regularly", "Avoid close contact with sick people"]
+   },
+   "malaria": {
+       "symptoms": ["fever", "chills", "sweating", "headache"],
+       "prevention": ["Use mosquito nets", "Apply insect repellent", "Drain stagnant water"]
+   },
+   "dengue": {
+       "symptoms": ["fever", "severe headache", "pain behind eyes", "joint pain", "muscle pain", "rash", "nausea"],
+       "prevention": ["Prevent mosquito bites", "Avoid water collection around home", "Use protective clothing"]
+   },
+   "typhoid": {
+       "symptoms": ["fever", "abdominal pain", "headache", "loss of appetite"],
+       "prevention": ["Drink boiled/filtered water", "Wash fruits & vegetables", "Maintain hygiene"]
+   },
+   "covid-19": {
+       "symptoms": ["fever", "cough", "loss of taste", "shortness of breath", "fatigue"],
+       "prevention": ["Wear masks in crowded areas", "Maintain distance", "Wash hands often", "Get vaccinated"]
+   },
+    "chikungunya": {
+         "symptoms": ["fever", "joint pain", "headache", "muscle pain", "rash"],
+         "prevention": ["Use mosquito repellents", "Wear long-sleeved clothing", "Eliminate mosquito breeding sites"]
+    },
+    "tuberculosis": {
+        "symptoms": ["persistent cough", "chest pain", "coughing blood", "weight loss", "night sweats", "fatigue"],
+        "prevention": ["Get vaccinated with BCG", "Avoid close contact with TB patients", "Ensure proper ventilation"]
+    },
+    "dengue": {
+        "symptoms": ["high fever", "severe headache", "pain behind eyes", "joint pain", "muscle pain", "rash", "nausea"],
+        "prevention": ["Prevent mosquito bites", "Avoid water collection around home", "Use protective clothing"]
+    },
+    "asthma": {
+        "symptoms": ["shortness of breath", "chest tightness", "wheezing", "coughing", "difficulty breathing"],
+        "prevention": ["Avoid triggers like smoke and allergens", "Use prescribed inhalers", "Maintain clean air environment"]
+    },
+    "pneumonia": {
+        "symptoms": ["fever", "cough with phlegm", "chest pain", "shortness of breath", "fatigue", "chills"],
+        "prevention": ["Get vaccinated", "Avoid smoking", "Wash hands frequently", "Seek prompt treatment for respiratory infections"]
+    },
+    "diabetes": {
+        "symptoms": ["frequent urination", "increased thirst", "increased hunger", "fatigue", "blurred vision", "slow healing wounds"],
+        "prevention": ["Maintain healthy diet", "Exercise regularly", "Monitor blood sugar levels"]
+    },
+    "hypertension": {
+        "symptoms": ["headache", "dizziness", "nosebleeds", "shortness of breath", "chest pain", "fatigue"],
+        "prevention": ["Reduce salt intake", "Exercise regularly", "Monitor blood pressure", "Avoid stress"]
+    },
+    "migraine": {
+        "symptoms": ["severe headache", "nausea", "vomiting", "sensitivity to light", "sensitivity to sound", "aura"],
+        "prevention": ["Avoid triggers", "Manage stress", "Maintain regular sleep", "Stay hydrated"]
+    },
+    "jaundice": {
+        "symptoms": ["yellow skin", "yellow eyes", "dark urine", "abdominal pain", "fatigue", "nausea"],
+        "prevention": ["Avoid contaminated food and water", "Practice good hygiene", "Get vaccinated for hepatitis"]
+    },
+    "chickenpox": {
+        "symptoms": ["itchy rash", "blisters", "fever", "loss of appetite", "tiredness", "headache"],
+        "prevention": ["Get vaccinated", "Avoid contact with infected people", "Maintain hygiene"]
+    },
+    "hepatitis": {
+        "symptoms": ["fatigue", "nausea", "vomiting", "abdominal pain", "jaundice", "dark urine"],
+        "prevention": ["Get vaccinated", "Avoid contaminated food and water", "Practice safe hygiene"]
+    },
+    "cholera": {
+        "symptoms": ["watery diarrhea", "vomiting", "leg cramps", "dehydration", "rapid heartbeat"],
+        "prevention": ["Drink clean water", "Practice good sanitation", "Avoid raw or undercooked food"]
+    },
+    "bronchitis": {
+        "symptoms": ["persistent cough", "mucus production", "fatigue", "shortness of breath", "chest discomfort"],
+        "prevention": ["Avoid smoking", "Stay hydrated", "Use humidifiers", "Seek treatment for infections"]
+    },
+    "measles": {
+        "symptoms": ["fever", "dry cough", "runny nose", "rash", "red eyes", "sore throat"],
+        "prevention": ["Get vaccinated", "Avoid contact with infected people", "Maintain hygiene"]
+    },
+    "appendicitis": {
+        "symptoms": ["abdominal pain", "loss of appetite", "nausea", "vomiting", "fever", "constipation"],
+        "prevention": ["No guaranteed prevention", "Maintain healthy diet", "Seek prompt medical care if symptoms appear"]
+    },
+    "anemia": {
+        "symptoms": ["fatigue", "weakness", "pale skin", "shortness of breath", "dizziness", "cold hands and feet"],
+        "prevention": ["Eat iron-rich foods", "Take supplements if prescribed", "Regular health check-ups"]
+    },
+    "gastroenteritis": {
+        "symptoms": ["diarrhea", "vomiting", "abdominal cramps", "fever", "nausea", "dehydration"],
+        "prevention": ["Practice good hygiene", "Drink clean water", "Avoid contaminated food"]
+    },
+    "urinary tract infection": {
+        "symptoms": ["burning sensation during urination", "frequent urination", "cloudy urine", "strong-smelling urine", "pelvic pain"],
+        "prevention": ["Drink plenty of water", "Urinate after intercourse", "Wipe front to back", "Avoid irritating feminine products"]
+    },
+    "sinusitis": {
+        "symptoms": ["facial pain", "nasal congestion", "runny nose", "headache", "fever", "cough"],
+        "prevention": ["Avoid upper respiratory infections", "Manage allergies", "Use humidifiers"]
+    },
+    "eczema": {
+        "symptoms": ["itchy skin", "red patches", "dry skin", "swelling", "crusting", "thickened skin"],
+        "prevention": ["Moisturize regularly", "Avoid irritants", "Use gentle skin care products", "Manage stress"]
+    },
+    "psoriasis": {
+        "symptoms": ["red patches", "silvery scales", "itching", "dry skin", "cracking skin", "joint pain"],
+        "prevention": ["Avoid triggers", "Moisturize skin", "Manage stress", "Follow treatment plan"]
+    },
+    "allergy": {
+        "symptoms": ["sneezing", "itchy eyes", "runny nose", "rash", "hives", "swelling"],
+        "prevention": ["Avoid known allergens", "Use antihistamines", "Keep environment clean"]
+    },
+    "food poisoning": {
+        "symptoms": ["nausea", "vomiting", "diarrhea", "abdominal cramps", "fever", "weakness"],
+        "prevention": ["Practice good food hygiene", "Cook food thoroughly", "Avoid cross-contamination"]
+    },
+    "conjunctivitis": {
+        "symptoms": ["red eyes", "itchy eyes", "tearing", "discharge", "swelling", "sensitivity to light"],
+        "prevention": ["Avoid touching eyes", "Practice good hygiene", "Avoid sharing personal items"]
+    },
+    "mumps": {
+        "symptoms": ["swollen salivary glands", "fever", "headache", "muscle aches", "fatigue", "loss of appetite"],
+        "prevention": ["Get vaccinated", "Avoid contact with infected people", "Maintain hygiene"]
+    },
+    "rubella": {
+        "symptoms": ["rash", "fever", "swollen lymph nodes", "joint pain", "headache", "runny nose"],
+        "prevention": ["Get vaccinated", "Avoid contact with infected people", "Maintain hygiene"]
+    }
+}
 
 # --- Collect all unique symptoms ---
 all_symptoms = sorted({s for info in disease_dict.values() for s in info["symptoms"]})
@@ -146,3 +272,4 @@ with tab3:
         st.write(f"📝 **{today}:** {notes}")
     
     st.markdown('</div>', unsafe_allow_html=True)
+
