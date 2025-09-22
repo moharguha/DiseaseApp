@@ -3,7 +3,7 @@ from datetime import date
 
 st.set_page_config(
     page_title="DiseaseApp",
-    page_icon="logo.png",  # Path to your icon file
+    page_icon="logo.PNG",  
     layout="wide"
 )
 disease_dict = {
