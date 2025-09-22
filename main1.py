@@ -1,6 +1,11 @@
 import streamlit as st
 from datetime import date
 
+st.set_page_config(
+    page_title="DiseaseApp",
+    page_icon="logo.png",  # Path to your icon file
+    layout="wide"
+)
 disease_dict = {
    "flu": {
        "symptoms": ["fever", "cough", "sore throat", "fatigue"],
@@ -272,4 +277,5 @@ with tab3:
         st.write(f"📝 **{today}:** {notes}")
     
     st.markdown('</div>', unsafe_allow_html=True)
+
 
