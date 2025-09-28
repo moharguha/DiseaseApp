@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import date, datetime
+import os
 
 # --- Disease dictionary ---
 disease_dict = {
@@ -25,17 +26,13 @@ disease_dict = {
        "symptoms": ["fever", "cough", "loss of taste", "shortness of breath", "fatigue"],
        "prevention": ["Wear masks in crowded areas", "Maintain distance", "Wash hands often", "Get vaccinated"]
    },
-    "chikungunya": {
+   "chikungunya": {
          "symptoms": ["fever", "joint pain", "headache", "muscle pain", "rash"],
          "prevention": ["Use mosquito repellents", "Wear long-sleeved clothing", "Eliminate mosquito breeding sites"]
     },
     "tuberculosis": {
         "symptoms": ["persistent cough", "chest pain", "coughing blood", "weight loss", "night sweats", "fatigue"],
         "prevention": ["Get vaccinated with BCG", "Avoid close contact with TB patients", "Ensure proper ventilation"]
-    },
-    "dengue": {
-        "symptoms": ["high fever", "severe headache", "pain behind eyes", "joint pain", "muscle pain", "rash", "nausea"],
-        "prevention": ["Prevent mosquito bites", "Avoid water collection around home", "Use protective clothing"]
     },
     "asthma": {
         "symptoms": ["shortness of breath", "chest tightness", "wheezing", "coughing", "difficulty breathing"],
@@ -154,10 +151,12 @@ def match_disease(symptoms):
 # --- Page Config ---
 st.set_page_config(page_title="Healix Health Tracker", layout="wide")
 
-# --- Custom CSS ---
+# --- Custom CSS (green background + styling) ---
 st.markdown(
     """
     <style>
+    .stApp {background-color: #d9fdd3;} /* Light green */
+    h1, h2, h3, h4, h5, h6 {color: #064e3b;} /* Dark green headings */
     .main {padding: 2rem 3rem;}
     .card {background-color: #f5f5f5; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin-bottom: 2rem;}
     .card-col {background-color: #fefefe; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-bottom: 1rem;}
@@ -168,13 +167,14 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# --- Title ---
+# --- Front Page ---
 st.title("💊 HEALIX :mask:")
 st.header("Your Personal Health Assistant")
-st.write("Select symptoms to check possible diseases, see prevention tips, and track your health. *(Educational use only, not medical advice.)*")
+st.subheader("👋 Hello! Welcome to Healix")
+st.write("Track symptoms, wellness, BMI, water intake, and your daily journal. *(For educational purposes only.)*")
 
 # --- Tabs ---
-tab1, tab2, tab3 = st.tabs(["🔍 Symptom Checker", "📖 Search by Disease", "💧 Health & Wellness"])
+tab1, tab2, tab3, tab4 = st.tabs(["🔍 Symptom Checker", "📖 Search by Disease", "💧 Health & Wellness", "📔 Journal"])
 
 # ---------- TAB 1: SYMPTOM CHECKER ----------
 with tab1:
@@ -214,30 +214,19 @@ with tab2:
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.header("Search Disease by Name")
     
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown('<div class="card-col">', unsafe_allow_html=True)
-        disease_name = st.text_input("Enter disease name (e.g., malaria)", key="disease_input")
-        if disease_name:
-            disease_info = disease_dict.get(disease_name.strip().lower())
-            if disease_info:
-                st.markdown(f"### {disease_name.title()} Symptoms:")
-                for s in disease_info["symptoms"]:
-                    st.markdown(f"- {s}")
-                if "prevention" in disease_info:
-                    st.markdown("**Prevention Tips:**")
-                    for tip in disease_info["prevention"]:
-                        st.markdown(f"- {tip}")
-            else:
-                st.error("❌ Disease not found in database.")
-        st.markdown('</div>', unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown('<div class="card-col">', unsafe_allow_html=True)
-        st.write("💡 Tips:")
-        st.write("- Type full or partial disease names")
-        st.write("- Use the Symptom Checker to narrow possibilities")
-        st.markdown('</div>', unsafe_allow_html=True)
+    disease_name = st.text_input("Enter disease name (e.g., malaria)", key="disease_input")
+    if disease_name:
+        disease_info = disease_dict.get(disease_name.strip().lower())
+        if disease_info:
+            st.markdown(f"### {disease_name.title()} Symptoms:")
+            for s in disease_info["symptoms"]:
+                st.markdown(f"- {s}")
+            if "prevention" in disease_info:
+                st.markdown("**Prevention Tips:**")
+                for tip in disease_info["prevention"]:
+                    st.markdown(f"- {tip}")
+        else:
+            st.error("❌ Disease not found in database.")
     
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -274,10 +263,6 @@ with tab3:
         ax.set_ylabel("Glasses")
         st.pyplot(fig)
 
-    # --- Weekly Graph Placeholder ---
-    st.subheader("📊 Weekly Water Intake")
-    st.info("Future update: Show last 7 days water consumption")
-
     # --- BMI Calculator ---
     st.subheader("⚖️ BMI Calculator")
     col1, col2 = st.columns(2)
@@ -298,23 +283,92 @@ with tab3:
         else:
             st.error("Obese ❌ - Consult a doctor")
 
-    # --- Health Notes ---
-    st.subheader("📝 Daily Health Notes")
-    today = date.today()
-    notes = st.text_area(f"Write health notes for {today}:", "", key="health_notes")
-    if st.button("Save Record", key="save_notes"):
-        st.success("Record saved! (Demo only, not stored permanently)")
-        st.write(f"📝 **{today}:** {notes}")
-
-    # --- Dashboard Cards ---
-    st.markdown("### 📊 Dashboard Overview")
-    colA, colB, colC = st.columns(3)
-    with colA:
-        st.markdown('<div class="card-col">🩺 <span class="big-font">Symptom Checker</span><br>Detects possible conditions</div>', unsafe_allow_html=True)
-    with colB:
-        st.markdown('<div class="card-col">⚖️ <span class="big-font">BMI Calculator</span><br>Tracks your weight status</div>', unsafe_allow_html=True)
-    with colC:
-        st.markdown('<div class="card-col">💧 <span class="big-font">Water Tracker</span><br>Keeps hydration in check</div>', unsafe_allow_html=True)
-
     st.markdown('</div>', unsafe_allow_html=True)
 
+
+# ---------- TAB 4: JOURNAL ----------
+import os
+
+# ---------- TAB 4: JOURNAL ----------
+with tab4:
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.header("📔 Personal Journal")
+
+    # Reflection question bank
+    reflection_questions = {
+        "Self & Identity": [
+            "Who am I when no one is watching?",
+            "What values do I refuse to compromise on?",
+            "Am I living more out of habit or out of choice?",
+            "Which parts of myself do I hide from others, and why?"
+        ],
+        "Life Direction": [
+            "If my life were a book, what chapter am I in right now?",
+            "Am I moving closer to the life I want, or just staying busy?",
+            "What’s something I’ve always wanted to try but keep postponing?",
+            "If I continue living the way I am now, where will I be in 5 years?"
+        ],
+        "Growth & Learning": [
+            "What have I learned about myself in the last month?",
+            "Do I listen more than I speak, or speak more than I listen?",
+            "What scares me but also excites me?",
+            "What’s the most recent belief I let go of, and why?"
+        ],
+        "Relationships": [
+            "Who are the people that bring out the best version of me?",
+            "Am I giving as much love as I want to receive?",
+            "Which relationships drain me, and which energize me?",
+            "Who do I need to forgive (including myself)?"
+        ],
+        "Perspective & Meaning": [
+            "When do I feel most alive?",
+            "What am I chasing that might not actually matter in the end?",
+            "How much of my life is shaped by my own choices vs. expectations of others?",
+            "If I stripped away fear, what would I be doing right now?"
+        ]
+    }
+
+    # File path for storage
+    journal_file = "journal_entries.csv"
+
+    # Load existing journal entries
+    if os.path.exists(journal_file):
+        journal_df = pd.read_csv(journal_file)
+    else:
+        journal_df = pd.DataFrame(columns=["date", "category", "question", "response"])
+
+    today = date.today()
+
+    # Select reflection category
+    category = st.selectbox("Choose a reflection topic:", list(reflection_questions.keys()))
+    if category:
+        import random
+        question = random.choice(reflection_questions[category])
+        st.write(f"💭 **Reflection Question:** {question}")
+
+    # Input journal entry
+    journal_entry = st.text_area(f"Write your thoughts for {today}:", "", key="journal_notes")
+
+    if st.button("Save Journal", key="save_journal"):
+        new_entry = {
+            "date": today,
+            "category": category,
+            "question": question,
+            "response": journal_entry
+        }
+        # Append to dataframe
+        journal_df = pd.concat([journal_df, pd.DataFrame([new_entry])], ignore_index=True)
+        # Save to CSV
+        journal_df.to_csv(journal_file, index=False)
+        st.success("✅ Journal saved permanently!")
+
+    # Display past entries
+    if not journal_df.empty:
+        st.subheader("📖 Past Journal Entries")
+        for _, rec in journal_df[::-1].iterrows():  # reverse order
+            st.markdown(f"**{rec['date']}** - *{rec['category']}*")
+            st.markdown(f"**Q:** {rec['question']}")
+            st.markdown(f"**A:** {rec['response']}")
+            st.markdown("---")
+
+    st.markdown('</div>', unsafe_allow_html=True)
