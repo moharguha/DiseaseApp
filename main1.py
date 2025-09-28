@@ -151,17 +151,24 @@ def match_disease(symptoms):
 # --- Page Config ---
 st.set_page_config(page_title="Healix Health Tracker", layout="wide")
 
-# --- Custom CSS (lavender background + styling) ---
+# Detect current theme
+is_dark = st.get_option("theme.base") == "dark"
+
+# Choose colors based on theme
+bg_color = "#E6E6FA" if not is_dark else "#2e1a47"  # light lavender / dark purple
+heading_color = "#4B0082" if not is_dark else "#D8B4FE"  # dark purple / light lavender for contrast
+card_bg = "#f5f5f5" if not is_dark else "#3c2a5f"  # card background light/dark
+
 st.markdown(
-    """
+    f"""
     <style>
-    .stApp {background-color: #E6E6FA;} /* Lavender background */
-    h1, h2, h3, h4, h5, h6 {color: #4B0082;} /* Dark purple headings */
-    .main {padding: 2rem 3rem;}
-    .card {background-color: #f5f5f5; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin-bottom: 2rem;}
-    .card-col {background-color: #fefefe; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-bottom: 1rem;}
-    .stTabs [role="tab"] {font-weight: bold; font-size: 16px;}
-    .big-font { font-size:22px !important; font-weight:600; }
+    .stApp {{background-color: {bg_color};}}
+    h1, h2, h3, h4, h5, h6 {{color: {heading_color};}}
+    .main {{padding: 2rem 3rem;}}
+    .card {{background-color: {card_bg}; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin-bottom: 2rem;}}
+    .card-col {{background-color: {card_bg}; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-bottom: 1rem;}}
+    .stTabs [role="tab"] {{font-weight: bold; font-size: 16px;}}
+    .big-font {{ font-size:22px !important; font-weight:600; }}
     </style>
     """,
     unsafe_allow_html=True
