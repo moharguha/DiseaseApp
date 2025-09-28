@@ -159,7 +159,7 @@ is_dark = st.get_option("theme.base") == "dark"
 # Define colors based on theme
 if not is_dark:
     bg_color = "#E6E6FA"         # lavender background
-    heading_color = "#4B0082"    # dark purple headings
+    heading_color = "#2D024D"  # dark purple headings
     card_bg = "#f5f5f5"          # light card background
     card_shadow = "0 8px 20px rgba(0,0,0,0.1)"
     card_col_bg = "#fefefe"
@@ -393,3 +393,4 @@ with tab4:
             st.markdown("---")
 
     st.markdown('</div>', unsafe_allow_html=True)
+
