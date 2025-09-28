@@ -151,11 +151,12 @@ def match_disease(symptoms):
 # --- Page Config ---
 st.set_page_config(page_title="Healix Health Tracker", layout="wide")
 
-# --- Custom CSS (green background + styling) ---
+# --- Custom CSS (white background + styling) ---
+# --- Custom CSS (white background + styling) ---
 st.markdown(
     """
     <style>
-    .stApp {background-color: #d9fdd3;} /* Light green */
+    .stApp {background-color: #ffffff;} /* White background */
     h1, h2, h3, h4, h5, h6 {color: #064e3b;} /* Dark green headings */
     .main {padding: 2rem 3rem;}
     .card {background-color: #f5f5f5; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin-bottom: 2rem;}
