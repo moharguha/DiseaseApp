@@ -11,15 +11,15 @@ disease_dict = {
        "prevention": ["Get vaccinated yearly", "Wash hands regularly", "Avoid close contact with sick people"]
    },
    "malaria": {
-       "symptoms": ["fever", "chills", "sweating", "headache"],
+       "symptoms": ["timed fever", "chills", "sweating", "severe headache"],
        "prevention": ["Use mosquito nets", "Apply insect repellent", "Drain stagnant water"]
    },
    "dengue": {
-       "symptoms": ["high fever", "severe headache", "pain behind eyes", "joint pain", "muscle pain", "rash", "nausea"],
+       "symptoms": ["timed fever", "severe headache", "pain behind eyes", "joint pain", "muscle pain", "rash", "nausea"],
        "prevention": ["Prevent mosquito bites", "Avoid water collection around home", "Use protective clothing"]
    },
    "typhoid": {
-       "symptoms": ["fever", "abdominal pain", "headache", "loss of appetite"],
+       "symptoms": ["timed fever", "abdominal pain", "headache", "loss of appetite"],
        "prevention": ["Drink boiled/filtered water", "Wash fruits & vegetables", "Maintain hygiene"]
    },
    "covid-19": {
@@ -51,7 +51,7 @@ disease_dict = {
         "prevention": ["Reduce salt intake", "Exercise regularly", "Monitor blood pressure", "Avoid stress"]
     },
     "migraine": {
-        "symptoms": ["severe headache", "nausea", "vomiting", "sensitivity to light", "sensitivity to sound", "aura"],
+        "symptoms": ["severe headache", "nausea", "vomiting", "sensitivity to light", "sensitivity to sound", "visual disturbances"],
         "prevention": ["Avoid triggers", "Manage stress", "Maintain regular sleep", "Stay hydrated"]
     },
     "jaundice": {
@@ -71,7 +71,7 @@ disease_dict = {
         "prevention": ["Drink clean water", "Practice good sanitation", "Avoid raw or undercooked food"]
     },
     "bronchitis": {
-        "symptoms": ["persistent cough", "mucus production", "fatigue", "shortness of breath", "chest discomfort"],
+        "symptoms": ["persistent cough", "mucus production", "fatigue", "shortness of breath", "chest pain"],
         "prevention": ["Avoid smoking", "Stay hydrated", "Use humidifiers", "Seek treatment for infections"]
     },
     "measles": {
