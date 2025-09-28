@@ -157,7 +157,7 @@ import streamlit as st
 is_dark = st.get_option("theme.base") == "dark"
 
 # Define colors based on theme
-f not is_dark:
+if not is_dark:
     bg_color = "#E6E6FA"         # lavender background
     heading_color = "#48037C"    # dark purple headings
     card_bg = "#f5f5f5"          # light card background
@@ -392,5 +392,6 @@ with tab4:
             st.markdown("---")
 
     st.markdown('</div>', unsafe_allow_html=True)
+
 
 
