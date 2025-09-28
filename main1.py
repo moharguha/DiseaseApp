@@ -35,7 +35,7 @@ disease_dict = {
         "prevention": ["Get vaccinated with BCG", "Avoid close contact with TB patients", "Ensure proper ventilation"]
     },
     "asthma": {
-        "symptoms": ["shortness of breath", "chest tightness", "wheezing", "coughing", "difficulty breathing"],
+        "symptoms": ["shortness of breath", "chest tightness", "wheezing", "cough", "difficulty breathing"],
         "prevention": ["Avoid triggers like smoke and allergens", "Use prescribed inhalers", "Maintain clean air environment"]
     },
     "pneumonia": {
@@ -87,7 +87,7 @@ disease_dict = {
         "prevention": ["Eat iron-rich foods", "Take supplements if prescribed", "Regular health check-ups"]
     },
     "gastroenteritis": {
-        "symptoms": ["diarrhea", "vomiting", "abdominal cramps", "fever", "nausea", "dehydration"],
+        "symptoms": ["diarrhea", "vomiting", "cramps", "fever", "nausea", "dehydration"],
         "prevention": ["Practice good hygiene", "Drink clean water", "Avoid contaminated food"]
     },
     "urinary tract infection": {
@@ -99,11 +99,11 @@ disease_dict = {
         "prevention": ["Avoid upper respiratory infections", "Manage allergies", "Use humidifiers"]
     },
     "eczema": {
-        "symptoms": ["itchy skin", "red patches", "dry skin", "swelling", "crusting", "thickened skin"],
+        "symptoms": ["itchy skin", "red patches", "swelling", "crusting", "thickened skin"],
         "prevention": ["Moisturize regularly", "Avoid irritants", "Use gentle skin care products", "Manage stress"]
     },
     "psoriasis": {
-        "symptoms": ["red patches", "silvery scales", "itching", "dry skin", "cracking skin", "joint pain"],
+        "symptoms": ["red patches", "silvery scales", "itchy skin", "dry cracking skin", "joint pain"],
         "prevention": ["Avoid triggers", "Moisturize skin", "Manage stress", "Follow treatment plan"]
     },
     "allergy": {
@@ -111,7 +111,7 @@ disease_dict = {
         "prevention": ["Avoid known allergens", "Use antihistamines", "Keep environment clean"]
     },
     "food poisoning": {
-        "symptoms": ["nausea", "vomiting", "diarrhea", "abdominal cramps", "fever", "weakness"],
+        "symptoms": ["nausea", "vomiting", "diarrhea", "cramps", "fever", "weakness"],
         "prevention": ["Practice good food hygiene", "Cook food thoroughly", "Avoid cross-contamination"]
     },
     "conjunctivitis": {
